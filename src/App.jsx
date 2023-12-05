@@ -23,7 +23,7 @@ function App() {
             name="query"
             className="buscador"
             type="text"
-            placeholder="Batman, Spiderman, Shrek..."
+            placeholder="Batman, Iron man, Shrek..."
           />
           <button type="submit">Buscar</button>
         </form>
