@@ -1,29 +1,18 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import { useMovies } from "./hooks/useMovies";
 
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("");
+  const { movies, setSearch } = useMovies();
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new window.FormData(event.target);
-    const query = data.get('query')
+    const query = data.get("query");
     setSearch(query);
   };
-
-
-
-  const getMovies = (search) => {
-    return fetch(`http://www.omdbapi.com/?apikey=37dfd9b4&s=${search}`)
-      .then((resp) => resp.json())
-      .then((data) => setMovies(data.Search));
-  };
-
-  useEffect(() => {
-    getMovies(search);
-  }, [search]);
 
   return (
     <>
@@ -43,10 +32,10 @@ function App() {
         <ul className="ul-grid">
           {movies?.map((movie) => {
             return (
-              <li className="grid-item" key={movie.imdbID}>
-                <h3>{movie.Title}</h3>
-                <p>{movie.Year}</p>
-                <img src={movie.Poster} alt="" />
+              <li className="grid-item" key={movie.id}>
+                <h3>{movie.title}</h3>
+                <p>{movie.year}</p>
+                <img src={movie.poster} alt="" />
               </li>
             );
           })}
