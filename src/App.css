@@ -8,8 +8,9 @@ body {
   align-items: center;
 }
 
-header {
+.page header {
   width: 100%;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +28,35 @@ header {
   margin: 0;
 }
 
-.form button {
+.page main {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-left: 0;
   
+}
+
+main .ul-grid {
+  padding: 0 32px;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.ul-grid .grid-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.grid-item h3, .grid-item p {
+  margin: 0;
+  padding: 0;
+}
+.grid-item img {
+  border-radius: 32px;
+  box-shadow: 1px 9px 22px 6px rgba(0,0,0,0.75);
 }
