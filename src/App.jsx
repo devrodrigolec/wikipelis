@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
 import "./App.css";
 import { useMovies } from "./hooks/useMovies";
 import { Movie } from "./components/Movie";
 
 function App() {
-  const { movies, setSearch } = useMovies();
+  const { movies, loading, error, setSearch } = useMovies();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,19 +19,22 @@ function App() {
         <form onSubmit={handleSubmit} className="form">
           <input
             name="query"
-            className="buscador"
+            className={`buscador ${error ? "buscador-rojo" : ""}`}
             type="text"
             placeholder="Batman, Iron man, Shrek..."
           />
           <button type="submit">Buscar</button>
         </form>
+        {error && <p className="error">{error}</p>}
       </header>
       <main>
-        <ul className="ul-grid">
-          {movies?.map((movie) => {
-            return <Movie key={movie.id} movie={movie} />;
-          })}
-        </ul>
+        {loading ? (
+          <p className="loading">Cargando...</p>
+        ) : (
+          <ul className="ul-grid">
+            <Movie movies={movies} />
+          </ul>
+        )}
       </main>
     </>
   );
