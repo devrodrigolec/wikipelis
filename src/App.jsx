@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import { useMovies } from "./hooks/useMovies";
-
+import { Movie } from "./components/Movie";
 
 function App() {
   const { movies, setSearch } = useMovies();
-
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,13 +30,7 @@ function App() {
       <main>
         <ul className="ul-grid">
           {movies?.map((movie) => {
-            return (
-              <li className="grid-item" key={movie.id}>
-                <h3>{movie.title}</h3>
-                <p>{movie.year}</p>
-                <img src={movie.poster} alt="" />
-              </li>
-            );
+            return <Movie key={movie.id} movie={movie} />;
           })}
         </ul>
       </main>
