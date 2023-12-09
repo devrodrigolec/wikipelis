@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { getMovies } from "../helpers/getMovies";
 import { mapMovies } from "../helpers/mapMovies";
 
@@ -8,11 +8,10 @@ export const useMovies = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const previousSearch = useRef("");
-  const initialSearch = useRef(true);
+  const firstSearch = useRef(true);
 
   const fetchData = async () => {
     try {
-      
       console.log("buscando");
       setLoading(true);
 
@@ -22,26 +21,27 @@ export const useMovies = () => {
     } finally {
       setLoading(false);
       previousSearch.current = search;
-      
     }
-  }
+  };
 
   useEffect(() => {
-    if (search === "" && initialSearch === false) {
+    
+    if (search === "" && !firstSearch.current) {
       setError("No existe criterio de búsqueda.");
       setMovies([]);
-      console.log('hola')
+      console.log("hola");
       return;
     }
-    if (previousSearch.current === search) return;
-    if ( search.length < 3) {
+    if (search.length > 0 && search.length < 3) {
       setError("La búsqueda debe tener 3 carácteres como mínimo.");
       setMovies([]);
       return;
     }
-    setError(null)
-    initialSearch.current = false;
-    fetchData();    
+    if (previousSearch.current === search) return;
+
+    setError(null);
+    firstSearch.current = false;
+    fetchData();
   }, [search]);
 
   const mappedMovies = mapMovies(movies);
