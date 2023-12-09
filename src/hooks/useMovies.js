@@ -1,6 +1,8 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, } from "react";
 import { getMovies } from "../helpers/getMovies";
 import { mapMovies } from "../helpers/mapMovies";
+
+
 
 export const useMovies = () => {
   const [movies, setMovies] = useState([]);
@@ -46,5 +48,5 @@ export const useMovies = () => {
 
   const mappedMovies = mapMovies(movies);
 
-  return { movies: mappedMovies, loading, error, setSearch };
+  return { movies: mappedMovies, loading, error, search, setSearch, setMovies };
 };

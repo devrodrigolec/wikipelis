@@ -20,10 +20,21 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  flex-wrap: wrap;
 }
-
+.sort-area {
+  display: flex;
+  font-size: 13px;
+  width: 85%;
+  
+  
+}
+.sort-area label {
+  font-weight: normal;
+  margin-left: 10px;
+}
 .form .buscador {
+  width: 70%;
   height: 38px;
   margin: 0;
 }
